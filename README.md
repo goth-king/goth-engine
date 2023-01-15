@@ -1,7 +1,7 @@
 # goth-engine
 3D Action RPG framework built in Godot.
 
-#Gameplay
+# Gameplay
 
 ## Single Player
 * No character creation screen
