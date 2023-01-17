@@ -9,8 +9,9 @@
 [node name="Hero" parent="." instance=ExtResource("1_14ty2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.56964, 0)
 
-[node name="WorldCamera" parent="." instance=ExtResource("2_a0kgq")]
+[node name="WorldCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_a0kgq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.27454, 5)
+target = NodePath("../Hero")
 
 [node name="simple_terrain" parent="." instance=ExtResource("3_fiekx")]
 
