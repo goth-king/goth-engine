@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://ck1ryixpnqwmh"]
+[gd_scene load_steps=4 format=3 uid="uid://ck1ryixpnqwmh"]
+
+[ext_resource type="PackedScene" uid="uid://pn8j1jn1n85j" path="res://hero.tscn" id="1_14ty2"]
+[ext_resource type="PackedScene" uid="uid://c8gqpekyormgi" path="res://world_camera.tscn" id="2_a0kgq"]
+[ext_resource type="PackedScene" uid="uid://cd104lmg0aq4" path="res://blend_files/simple_terrain.blend" id="3_fiekx"]
 
 [node name="World" type="Node3D"]
+
+[node name="Hero" parent="." instance=ExtResource("1_14ty2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.56964, 0)
+
+[node name="WorldCamera" parent="." instance=ExtResource("2_a0kgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.27454, 5)
+
+[node name="simple_terrain" parent="." instance=ExtResource("3_fiekx")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.969774, 0.244004, 0, -0.244004, 0.969774, 0, 18.8779, 0)
+shadow_enabled = true
