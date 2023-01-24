@@ -26,6 +26,10 @@ extends CharacterBody3D
 #		Benefit:
 #			Less fatiguing gameplay by reducing wasted inputs
 #			More confidence in controls and a better feeling of quality (input causes the expected output (almost) every time)
+#
+#		Addendum:
+#			Simultaneous actions (e.g. move & attack)
+#			Actiosn influenced by other actions, and by states (attack while moving, and while also blinded)
 #			
 
 
@@ -36,9 +40,11 @@ extends CharacterBody3D
 @export var jump : float = 5.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 
+
 enum STATE {IDLE, MOVING, FALLING}
 var state = STATE.IDLE
 
+@onready var animplayer : AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,52 +57,57 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	
 	var movement = get_movement_input()
+	look_at(global_transform.origin + movement)
+	
+	var action = get_action_input()
+
+	
+
+	if not is_on_floor():
+		state = STATE.FALLING	
+		state_falling()
+	elif movement.length() > 0:
+		state = STATE.MOVING
+		state_moving()
+	else:
+		state = STATE.IDLE
+		state_idle()
+	
+
 	
 	velocity.x = speed * movement.x
 	velocity.z = speed * movement.z
-
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump
-
-	match state:
-		STATE.IDLE:
-			state = state_idle()
-		STATE.MOVING:
-			state = state_moving()
-		STATE.FALLING:
-			state = state_falling()
-
+	velocity.y -= gravity
+	move_and_slide()
+	
 
 func state_idle():
+			
+	if Input.is_action_just_pressed("attack") and not animplayer.is_playing():
+		animplayer.play("attack")
+	
+	if Input.is_action_just_pressed("jump") and not animplayer.is_playing():
+		animplayer.play("jump")
+		
 
-	if not is_on_floor():
-		return STATE.FALLING
-	elif velocity.length() != 0:
-		return STATE.MOVING
-	else:
-		return STATE.IDLE
 	
 func state_moving():
 	
-	if not is_on_floor():
-		return STATE.FALLING
-	elif velocity.length() == 0:
-		return STATE.IDLE
-	else:
-		move_and_slide()
-		return STATE.MOVING
+	if Input.is_action_just_pressed("attack") and not animplayer.is_playing():
+		animplayer.play("attack")
+		
+	if Input.is_action_just_pressed("jump") and not animplayer.is_playing():
+		animplayer.play("jump")
+		
+
+		
 
 	
 func state_falling():
-	
-	if not is_on_floor():
-		velocity.y -= gravity
-		move_and_slide()
-		return STATE.FALLING
-	else:
-		return STATE.IDLE
+	pass
+
+
 	
 
 
@@ -117,3 +128,10 @@ func get_movement_input():
 		input = input.normalized()
 		
 	return input
+
+func get_action_input():
+	pass
+
+
+func do_jump():
+	velocity.y = jump

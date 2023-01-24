@@ -1,10 +1,63 @@
-[gd_scene load_steps=4 format=3 uid="uid://pn8j1jn1n85j"]
+[gd_scene load_steps=8 format=3 uid="uid://pn8j1jn1n85j"]
 
 [ext_resource type="Script" path="res://hero.gd" id="1_ivxtd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s7v30"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qtig8"]
+
+[sub_resource type="Animation" id="Animation_cahrf"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D/MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, 0, -0.2, 0.2, 1, 0, 0.1, -0.1, 0.3, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_uog0h"]
+resource_name = "land"
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D/MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, 1, 1, 1, 0.2, 1, 1.25, 0.75, 1.25, 0.4, 1, 0.9, 1.1, 0.9, 0.6, 1, 1.1, 0.9, 1.1, 0.9, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_r7o78"]
+resource_name = "jump"
+length = 0.5
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D/MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.1, 1, 0.75, 1.25, 0.75, 0.3, 1, 1.1, 0.9, 1.1, 0.5, 1, 1, 1, 1)
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"do_jump"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ocqbu"]
+_data = {
+"attack": SubResource("Animation_cahrf"),
+"jump": SubResource("Animation_r7o78"),
+"land": SubResource("Animation_uog0h")
+}
 
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_ivxtd")
@@ -13,4 +66,10 @@ script = ExtResource("1_ivxtd")
 shape = SubResource("CapsuleShape3D_s7v30")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1.05, 0, 0, 0, 0.95, 0, 0, 0, 1.05, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_qtig8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ocqbu")
+}
