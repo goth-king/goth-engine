@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck1ryixpnqwmh"]
+[gd_scene load_steps=9 format=3 uid="uid://ck1ryixpnqwmh"]
 
 [ext_resource type="PackedScene" uid="uid://pn8j1jn1n85j" path="res://hero.tscn" id="1_14ty2"]
 [ext_resource type="PackedScene" uid="uid://c8gqpekyormgi" path="res://world_camera.tscn" id="2_a0kgq"]
 [ext_resource type="PackedScene" uid="uid://cd104lmg0aq4" path="res://blend_files/simple_terrain.blend" id="3_fiekx"]
+[ext_resource type="PackedScene" uid="uid://lnu37rgfx33d" path="res://blend_files/ramp.blend" id="4_yuj17"]
+[ext_resource type="PackedScene" uid="uid://fijqvoddenmb" path="res://blend_files/stairs.blend" id="5_ertry"]
+[ext_resource type="PackedScene" uid="uid://dunrun2mdecfs" path="res://blend_files/wall_tapered.blend" id="6_51x1v"]
+[ext_resource type="PackedScene" uid="uid://bk2aiv7jnajcn" path="res://blend_files/platform_high.blend" id="7_lnw56"]
+[ext_resource type="PackedScene" uid="uid://bj6vu0ufwfpcl" path="res://blend_files/platform_low.blend" id="8_5w0fv"]
 
 [node name="World" type="Node3D"]
 
@@ -18,3 +23,18 @@ target = NodePath("../Hero")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.969774, 0.244004, 0, -0.244004, 0.969774, 0, 18.8779, 0)
 shadow_enabled = true
+
+[node name="ramp" parent="." instance=ExtResource("4_yuj17")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -7.3777, 3.9381, 12.1417)
+
+[node name="stairs" parent="." instance=ExtResource("5_ertry")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 15.1775, 0.472515, 0)
+
+[node name="wall_tapered" parent="." instance=ExtResource("6_51x1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8084, 3.38822, 0)
+
+[node name="platform_high" parent="." instance=ExtResource("7_lnw56")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2111, 3.93903, -8.57409)
+
+[node name="platform_low" parent="." instance=ExtResource("8_5w0fv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4008, 3.96144, 10.113)
