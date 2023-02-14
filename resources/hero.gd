@@ -41,7 +41,19 @@ func _physics_process(delta):
 	
 	velocity.x = speed * movement.x
 	velocity.z = speed * movement.z
-	velocity.y -= gravity
+	if is_on_wall():
+		var collider = get_last_slide_collision().get_collider()
+		var collider_class
+		if collider.has_method("get_extended_class"):
+			collider_class = collider.get_extended_class()
+			if collider_class == "Ladder":
+				velocity.x = 0
+				velocity.z = 0
+				velocity.y = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
+			
+			
+	else:
+		velocity.y -= gravity
 	move_and_slide()
 	
 

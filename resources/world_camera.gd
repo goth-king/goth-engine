@@ -3,7 +3,7 @@ extends Camera3D
 @export var arm_length:float = 5.0
 @export var elevation:float = 3.0
 
-@export @onready var target:Node3D
+@export var target:Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
