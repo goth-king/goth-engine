@@ -1,7 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://pn8j1jn1n85j"]
 
 [ext_resource type="Script" path="res://hero.gd" id="1_ivxtd"]
-[ext_resource type="Script" path="res://HeroStateMachine.gd" id="2_h5b2x"]
 [ext_resource type="Script" path="res://Running.gd" id="3_5o46l"]
 [ext_resource type="Script" path="res://Standing.gd" id="3_woydq"]
 [ext_resource type="Script" path="res://Falling.gd" id="5_3lxtp"]
@@ -63,6 +62,20 @@ _data = {
 "land": SubResource("Animation_uog0h")
 }
 
+[sub_resource type="GDScript" id="GDScript_aoxjx"]
+script/source = "extends StateMachine
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_ivxtd")
 
@@ -79,7 +92,7 @@ libraries = {
 }
 
 [node name="HeroStateMachine" type="Node" parent="."]
-script = ExtResource("2_h5b2x")
+script = SubResource("GDScript_aoxjx")
 initial_state = NodePath("Standing")
 
 [node name="Standing" type="Node" parent="HeroStateMachine"]
