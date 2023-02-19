@@ -1,4 +1,4 @@
-class_name Ladder
+class_name Stairs
 extends MeshInstance3D
 
 var height : float

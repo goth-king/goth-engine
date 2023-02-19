@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Standing.gd" id="3_woydq"]
 [ext_resource type="Script" path="res://Falling.gd" id="5_3lxtp"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s7v30"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0matx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qtig8"]
 
@@ -78,9 +78,11 @@ func _process(delta):
 
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_ivxtd")
+speed = null
+jump = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_s7v30")
+shape = SubResource("CapsuleShape3D_0matx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(1.05, 0, 0, 0, 0.95, 0, 0, 0, 1.05, 0, 0, 0)

@@ -4,6 +4,8 @@ extends CharacterBody3D
 @export var jump : float = 5.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 var action = null
+var input : Vector3
+var facing : Vector3
 
 
 @onready var animplayer : AnimationPlayer = $AnimationPlayer
@@ -21,28 +23,29 @@ func _process(delta):
 
 func _physics_process(delta):
 	var movement = get_movement_input()
-	look_at(global_transform.origin + movement)
 	
+	if movement.length() > 0:
+		look_at(global_transform.origin + movement)
+		facing = movement.normalized()
 	
+	velocity.y -= gravity
 	velocity.x = speed * movement.x
 	velocity.z = speed * movement.z
+	
 	if is_on_wall():
-		var collider = get_last_slide_collision().get_collider()
-		var collider_shape = get_last_slide_collision().get_collider_shape().shape
-		if collider is StaticBodyLadder:
-			if transform.origin.y < (collider.transform.origin.y + collider_shape.size.y - 1):
-				velocity.x = 0
-				velocity.z = 0
-				velocity.y = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")#
-			
-	else:
-		velocity.y -= gravity
+		var collider = get_last_slide_collision().get_collider().get_parent()
+		if collider is Ladder: 
+			var height = collider.height
+			velocity.x = collider.position.x - position.x
+			velocity.z = collider.position.z - position.z
+			velocity.y = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
+		elif collider is Stairs:
+			velocity.y = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
 	move_and_slide()
 	
 
-
 func get_movement_input():
-	var input : Vector3
+	
 	var orientation:Vector3
 	var camera = get_viewport().get_camera_3d()
 	

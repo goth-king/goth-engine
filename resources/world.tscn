@@ -1,20 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqvpqu7k34525"]
+[gd_scene load_steps=9 format=3 uid="uid://dqvpqu7k34525"]
 
 [ext_resource type="PackedScene" uid="uid://pn8j1jn1n85j" path="res://hero.tscn" id="1_14ty2"]
 [ext_resource type="PackedScene" uid="uid://c8gqpekyormgi" path="res://world_camera.tscn" id="2_a0kgq"]
-[ext_resource type="PackedScene" uid="uid://cd104lmg0aq4" path="res://blend_files/simple_terrain.blend" id="3_fiekx"]
-[ext_resource type="PackedScene" uid="uid://lnu37rgfx33d" path="res://blend_files/ramp.blend" id="4_yuj17"]
-[ext_resource type="PackedScene" uid="uid://fijqvoddenmb" path="res://blend_files/stairs.blend" id="5_ertry"]
-[ext_resource type="PackedScene" uid="uid://dunrun2mdecfs" path="res://blend_files/wall_tapered.blend" id="6_51x1v"]
-[ext_resource type="PackedScene" uid="uid://bk2aiv7jnajcn" path="res://blend_files/platform_high.blend" id="7_lnw56"]
-[ext_resource type="PackedScene" uid="uid://bj6vu0ufwfpcl" path="res://blend_files/platform_low.blend" id="8_5w0fv"]
-[ext_resource type="Script" path="res://Ladder.gd" id="9_niblp"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_k408c"]
-size = Vector3(1, 4, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_16g1v"]
-size = Vector3(1, 4, 1)
+[ext_resource type="ArrayMesh" uid="uid://bvy3t87rhgo28" path="res://meshes/stairs.tres" id="3_5qhlf"]
+[ext_resource type="Script" path="res://class_scripts/class_stairs.gd" id="4_l3vca"]
+[ext_resource type="ArrayMesh" uid="uid://cfr55n36mfk4l" path="res://meshes/simple_terrain.tres" id="5_1vywg"]
+[ext_resource type="ArrayMesh" uid="uid://c0ps5espm2c1l" path="res://meshes/ladder.tres" id="5_mxbxu"]
+[ext_resource type="Script" path="res://class_scripts/class_terrain.gd" id="6_o13km"]
+[ext_resource type="Script" path="res://class_scripts/class_ladder.gd" id="8_mncao"]
 
 [node name="World" type="Node3D"]
 
@@ -25,33 +18,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.56964, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.27454, 5)
 target = NodePath("../Hero")
 
-[node name="simple_terrain" parent="." instance=ExtResource("3_fiekx")]
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.969774, 0.244004, 0, -0.244004, 0.969774, 0, 18.8779, 0)
 shadow_enabled = true
 
-[node name="ramp" parent="." instance=ExtResource("4_yuj17")]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -7.3777, 3.9381, 12.1417)
+[node name="Stairs" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.236991, 0, -0.971512, 0, 1, 0, 0.971512, 0, 0.236991, 14.2003, 0.401235, -1.81286)
+mesh = ExtResource("3_5qhlf")
+script = ExtResource("4_l3vca")
 
-[node name="stairs" parent="." instance=ExtResource("5_ertry")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 15.1775, 0.472515, 0)
+[node name="Terrain" type="MeshInstance3D" parent="."]
+mesh = ExtResource("5_1vywg")
+script = ExtResource("6_o13km")
 
-[node name="wall_tapered" parent="." instance=ExtResource("6_51x1v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8084, 3.38822, 0)
-
-[node name="platform_high" parent="." instance=ExtResource("7_lnw56")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2111, 3.93903, -8.57409)
-
-[node name="platform_low" parent="." instance=ExtResource("8_5w0fv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4008, 3.96144, 10.113)
-
-[node name="Ladder" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65516, 2.83264, 0)
-script = ExtResource("9_niblp")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder"]
-shape = SubResource("BoxShape3D_k408c")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ladder"]
-mesh = SubResource("BoxMesh_16g1v")
+[node name="Ladder" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0112746, 0, 0.999936, 0, 1, 0, -0.999936, 0, -0.0112746, 7.97481, 0.667176, 0)
+mesh = ExtResource("5_mxbxu")
+script = ExtResource("8_mncao")
