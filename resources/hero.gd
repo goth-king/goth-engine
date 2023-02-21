@@ -15,11 +15,8 @@ var facing : Vector3
 func _ready():
 	pass # Replace with function body.
 
-
-
 func _process(delta):
 	pass
-
 
 func _physics_process(delta):
 	var movement = get_movement_input()
@@ -33,17 +30,39 @@ func _physics_process(delta):
 	velocity.z = speed * movement.z
 	
 	if is_on_wall():
-		var collider = get_last_slide_collision().get_collider().get_parent()
-		if collider is Ladder: 
-			var height = collider.height
-			velocity.x = collider.position.x - position.x
-			velocity.z = collider.position.z - position.z
-			velocity.y = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
-		elif collider is Stairs:
-			velocity.y = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
-	move_and_slide()
+		var wall = get_last_slide_collision()
+		var wall_body = wall.get_collider()
+		var wall_height = wall.get_collider_shape().shape.get_debug_mesh().get_aabb().size.y
+		var wall_normal = get_wall_normal()
+		var climb_movement
+		
+		#pushing toward the wall causes climbing up, pulling away causes climbing down
+		#will be replaced with code only triggering climbing if pushing against wall at a near perpendicular angle
+		if movement.dot(wall_normal) < 0:
+			climb_movement = movement.length()
+		else:
+			climb_movement = -1 * movement.length()
+		
+		#Will be replaced with a state machine
+		#clean up movement (make character climb straight up the center of the ladder, straight up ledges), tie into animationtree
+		if wall_body is Platform:
+			velocity.y = climb_movement
+			velocity.x = 0
+			velocity.z = 0
+		if wall_body is Ladder: 
+			velocity.y = climb_movement
+			velocity.x = 0
+			velocity.z = 0
+		elif wall_body is Stairs:
+			velocity.y = climb_movement
+		else:
+			velocity.y = climb_movement
 	
 
+	
+	move_and_slide()
+	
+#rotates movement input based on camera view angle
 func get_movement_input():
 	
 	var orientation:Vector3

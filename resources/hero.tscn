@@ -78,8 +78,6 @@ func _process(delta):
 
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_ivxtd")
-speed = null
-jump = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_0matx")

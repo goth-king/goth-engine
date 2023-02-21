@@ -1,2 +1,2 @@
-class_name Terrain
+class_name Platform
 extends StaticBody3D
