@@ -42,6 +42,17 @@ shape = SubResource("ConvexPolygonShape3D_sgbrw")
 mesh = ExtResource("3_7dl6n")
 skeleton = NodePath("../..")
 
+[node name="Platform4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66201, 1.26662, 7.91015)
+script = ExtResource("3_x3of0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform4"]
+shape = SubResource("ConvexPolygonShape3D_sgbrw")
+
+[node name="PlatformLow" type="MeshInstance3D" parent="Platform4"]
+mesh = ExtResource("3_7dl6n")
+skeleton = NodePath("../..")
+
 [node name="Platform2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8274, 4.07447, 9.89864)
 script = ExtResource("3_x3of0")
@@ -50,6 +61,28 @@ script = ExtResource("3_x3of0")
 shape = SubResource("ConvexPolygonShape3D_sgbrw")
 
 [node name="PlatformLow" type="MeshInstance3D" parent="Platform2"]
+mesh = ExtResource("3_7dl6n")
+skeleton = NodePath("../..")
+
+[node name="Platform5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83229, 0.0617023, 6.51142)
+script = ExtResource("3_x3of0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform5"]
+shape = SubResource("ConvexPolygonShape3D_sgbrw")
+
+[node name="PlatformLow" type="MeshInstance3D" parent="Platform5"]
+mesh = ExtResource("3_7dl6n")
+skeleton = NodePath("../..")
+
+[node name="Platform3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.69501, 4.07447, 9.89864)
+script = ExtResource("3_x3of0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform3"]
+shape = SubResource("ConvexPolygonShape3D_sgbrw")
+
+[node name="PlatformLow" type="MeshInstance3D" parent="Platform3"]
 mesh = ExtResource("3_7dl6n")
 skeleton = NodePath("../..")
 
