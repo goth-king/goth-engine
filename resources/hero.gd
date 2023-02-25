@@ -10,6 +10,7 @@ var input : Vector3
 var facing : Vector3
 var movement : Vector3
 var collider : CollisionObject3D
+var collision : KinematicCollision3D
 
 enum STATE {STAND, RUN, CLIMB, FALL}
 var state = STATE.STAND
@@ -24,8 +25,8 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-	set_collider()
 	
+	set_collider()
 
 	movement = PlayerInput.get_movement_vector()
 			
@@ -47,6 +48,7 @@ func standing():
 	return STATE.STAND
 
 func running():
+	
 	if collider is Ladder:
 		return STATE.CLIMB
 	if movement.length() == 0:
@@ -61,9 +63,28 @@ func running():
 #climbing doesn't work
 func climbing():
 	if collider is Ladder:
-		velocity.y = 1
-		move_and_slide()
-		return STATE.CLIMB
+		if movement.dot(collision.get_normal()) < 0:
+			velocity.x = collider.position.x - position.x
+			velocity.z = collider.position.z - position.z
+			velocity.y = 1
+			move_and_slide()
+			return STATE.CLIMB
+		elif movement.dot(collision.get_normal()) > 0:
+			if is_on_floor():
+				velocity.y -= gravity
+				velocity.x = speed * movement.x
+				velocity.z = speed * movement.z
+				move_and_slide()
+				return STATE.RUN
+			else:
+				velocity.x = collider.position.x - position.x
+				velocity.z = collider.position.z - position.z
+				velocity.y = -1
+				move_and_slide()
+				return STATE.CLIMB
+		else:
+			collider = null
+			return STATE.RUN
 	else:
 		return STATE.FALL
 		
@@ -77,30 +98,23 @@ func falling():
 		return STATE.FALL
 	
 
-#reads all collisions and sets collider to the most relevant collider class
-#needs cleanup
+#checks all collisions for Ladder or Platform
 func set_collider():
 	var new_collider
-	var collision
 	var touched = false
 	
-	#looks for collisions with specified classes
-	for i in range(get_slide_collision_count()):
-		collision = get_slide_collision(i)
-		new_collider = collision.get_collider()
-		if touched == false:
-			if (collider != new_collider) and (new_collider is Ladder or new_collider is Platform):
-				collider = new_collider
-				touched = true
-				print(Time.get_ticks_msec()," ", collider, " touched collider")
+	var collision_count = get_slide_collision_count()
 	
-	#if no specified classes were found, looks for floor
-	if touched == false:
-		if is_on_floor_only():
-			collision = get_last_slide_collision()
-			if collision:
-				collider = collision.get_collider()
-	
-	#if no floor is found, clears collider
-	if not is_on_ceiling() and not is_on_floor():
+	if collision_count:
+		#looks for collisions with specified classes
+		for i in range(collision_count):
+			if touched == false:
+				collision = get_slide_collision(i)
+				new_collider = collision.get_collider()
+				if (collider != new_collider) and (new_collider is Ladder or new_collider is Platform):
+					collider = new_collider
+					touched = true
+					print(Time.get_ticks_msec()," ", collider, " touched collider")
+	else:
 		collider = null
+		collision = null
