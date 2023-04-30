@@ -1,0 +1,202 @@
+[gd_scene load_steps=20 format=3 uid="uid://6g2ye2c6e3bw"]
+
+[ext_resource type="Script" path="res://badguy.gd" id="1_agfoj"]
+[ext_resource type="PackedScene" uid="uid://c7uimhio4ud4j" path="res://SwatModel.tscn" id="1_o0gvw"]
+[ext_resource type="PackedScene" uid="uid://bfvlj2fatrhgs" path="res://state_machine.tscn" id="3_sdal0"]
+[ext_resource type="AnimationLibrary" uid="uid://bioq5x26vsl0h" path="res://animations/Man.res" id="4_bs7cg"]
+[ext_resource type="Script" path="res://AttackArea3D.gd" id="5_6jpmd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jg6hp"]
+radius = 0.25
+height = 1.7
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q345g"]
+animation = &"Man/Alert"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wvsue"]
+animation = &"Man/Punch"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_hf4ks"]
+filters = ["../GeneralSkeleton:Chest", "../GeneralSkeleton:Head", "../GeneralSkeleton:Hips", "../GeneralSkeleton:LeftHand", "../GeneralSkeleton:LeftIndexDistal", "../GeneralSkeleton:LeftIndexIntermediate", "../GeneralSkeleton:LeftIndexProximal", "../GeneralSkeleton:LeftLittleDistal", "../GeneralSkeleton:LeftLittleIntermediate", "../GeneralSkeleton:LeftLittleProximal", "../GeneralSkeleton:LeftLowerArm", "../GeneralSkeleton:LeftMiddleDistal", "../GeneralSkeleton:LeftMiddleIntermediate", "../GeneralSkeleton:LeftMiddleProximal", "../GeneralSkeleton:LeftRingDistal", "../GeneralSkeleton:LeftRingIntermediate", "../GeneralSkeleton:LeftRingProximal", "../GeneralSkeleton:LeftShoulder", "../GeneralSkeleton:LeftThumbDistal", "../GeneralSkeleton:LeftThumbMetacarpal", "../GeneralSkeleton:LeftThumbProximal", "../GeneralSkeleton:LeftUpperArm", "../GeneralSkeleton:Neck", "../GeneralSkeleton:RightHand", "../GeneralSkeleton:RightIndexDistal", "../GeneralSkeleton:RightIndexIntermediate", "../GeneralSkeleton:RightIndexProximal", "../GeneralSkeleton:RightLittleDistal", "../GeneralSkeleton:RightLittleIntermediate", "../GeneralSkeleton:RightLittleProximal", "../GeneralSkeleton:RightLowerArm", "../GeneralSkeleton:RightMiddleDistal", "../GeneralSkeleton:RightMiddleIntermediate", "../GeneralSkeleton:RightMiddleProximal", "../GeneralSkeleton:RightRingDistal", "../GeneralSkeleton:RightRingIntermediate", "../GeneralSkeleton:RightRingProximal", "../GeneralSkeleton:RightShoulder", "../GeneralSkeleton:RightThumbDistal", "../GeneralSkeleton:RightThumbMetacarpal", "../GeneralSkeleton:RightThumbProximal", "../GeneralSkeleton:RightUpperArm", "../GeneralSkeleton:Spine", "../GeneralSkeleton:UpperChest", "../GeneralSkeleton:mixamorig_LeftHandIndex1", "../GeneralSkeleton:mixamorig_LeftHandMiddle1", "../GeneralSkeleton:mixamorig_LeftHandPinky1", "../GeneralSkeleton:mixamorig_LeftHandRing1", "../GeneralSkeleton:mixamorig_LeftHandThumb1", "../GeneralSkeleton:mixamorig_RightHandIndex1", "../GeneralSkeleton:mixamorig_RightHandMiddle1", "../GeneralSkeleton:mixamorig_RightHandPinky1", "../GeneralSkeleton:mixamorig_RightHandRing1", "../GeneralSkeleton:mixamorig_RightHandThumb1"]
+fadein_time = 0.25
+fadeout_time = 0.25
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbu8p"]
+animation = &"Man/Hit"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_m744a"]
+filter_enabled = true
+filters = ["../GeneralSkeleton:Chest", "../GeneralSkeleton:Head", "../GeneralSkeleton:LeftLowerArm", "../GeneralSkeleton:LeftMiddleProximal", "../GeneralSkeleton:LeftShoulder", "../GeneralSkeleton:LeftUpperArm", "../GeneralSkeleton:Neck", "../GeneralSkeleton:RightLowerArm", "../GeneralSkeleton:RightShoulder", "../GeneralSkeleton:RightUpperArm", "../GeneralSkeleton:Spine", "../GeneralSkeleton:UpperChest"]
+fadein_time = 0.1
+fadeout_time = 0.25
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6d3hj"]
+animation = &"Man/Idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_uemxx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o85ta"]
+animation = &"Man/Run"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_40lv5"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_26x4p"]
+graph_offset = Vector2(-270.655, -42.4357)
+nodes/Alert/node = SubResource("AnimationNodeAnimation_q345g")
+nodes/Alert/position = Vector2(-32, 160)
+nodes/Attack/node = SubResource("AnimationNodeAnimation_wvsue")
+nodes/Attack/position = Vector2(704, 304)
+nodes/AttackShot/node = SubResource("AnimationNodeOneShot_hf4ks")
+nodes/AttackShot/position = Vector2(976, 48)
+nodes/Hit/node = SubResource("AnimationNodeAnimation_bbu8p")
+nodes/Hit/position = Vector2(1056, 304)
+nodes/HitShot/node = SubResource("AnimationNodeOneShot_m744a")
+nodes/HitShot/position = Vector2(1280, 64)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_6d3hj")
+nodes/Idle/position = Vector2(-32, 0)
+nodes/IdleBlend/node = SubResource("AnimationNodeBlend2_uemxx")
+nodes/IdleBlend/position = Vector2(336, -16)
+nodes/Run/node = SubResource("AnimationNodeAnimation_o85ta")
+nodes/Run/position = Vector2(272, 288)
+nodes/RunBlend/node = SubResource("AnimationNodeBlend2_40lv5")
+nodes/RunBlend/position = Vector2(656, 16)
+nodes/output/position = Vector2(1632, 112)
+node_connections = [&"output", 0, &"HitShot", &"AttackShot", 0, &"RunBlend", &"AttackShot", 1, &"Attack", &"HitShot", 0, &"AttackShot", &"HitShot", 1, &"Hit", &"IdleBlend", 0, &"Idle", &"IdleBlend", 1, &"Alert", &"RunBlend", 0, &"IdleBlend", &"RunBlend", 1, &"Run"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rq4t3"]
+height = 1.0
+radius = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u54i8"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4qrlw"]
+size = Vector3(0.75, 0.5, 0.5)
+
+[node name="Badguy" type="CharacterBody3D"]
+script = ExtResource("1_agfoj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_jg6hp")
+
+[node name="GeneralSkeleton" parent="." instance=ExtResource("1_o0gvw")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+bones/0/position = Vector3(0.00269402, 0.89962, -0.00391231)
+bones/0/rotation = Quaternion(-0.0385827, -0.366551, -0.0142611, 0.929488)
+bones/1/rotation = Quaternion(0.047572, 0.0399193, -0.00833386, 0.998035)
+bones/2/rotation = Quaternion(0.0950244, 0.0804809, -0.0178073, 0.992057)
+bones/3/rotation = Quaternion(0.0950302, 0.0805594, -0.0178958, 0.992048)
+bones/4/rotation = Quaternion(-0.0232178, -0.0103706, 0.00178859, 0.999675)
+bones/6/rotation = Quaternion(-0.070852, 0.177162, -0.00284019, 0.981624)
+bones/11/rotation = Quaternion(0.51931, 0.465757, 0.526438, -0.486056)
+bones/12/rotation = Quaternion(0.0480574, 0.83711, -0.53394, 0.10884)
+bones/13/rotation = Quaternion(0.289118, -0.596452, 0.299986, 0.68605)
+bones/14/rotation = Quaternion(-0.070293, 0.792583, 0.0860471, 0.599556)
+bones/15/rotation = Quaternion(0.0425638, 0.0806367, -0.051693, 0.994492)
+bones/16/rotation = Quaternion(-0.218697, 0.673595, 0.208192, 0.674609)
+bones/17/rotation = Quaternion(-1.77636e-15, 7.45058e-08, 1.11022e-15, 1)
+bones/18/rotation = Quaternion(1.49012e-08, -1.04308e-07, 0, 1)
+bones/19/position = Vector3(-0.0272523, 0.118459, 0.00222831)
+bones/19/rotation = Quaternion(0.0707174, -0.00420171, 0.0649962, 0.995368)
+bones/20/rotation = Quaternion(0.16025, -0.00107562, -0.00549712, 0.987061)
+bones/21/rotation = Quaternion(0, 0, 5.96046e-08, 1)
+bones/22/rotation = Quaternion(2.98023e-08, -2.98023e-08, 2.98023e-08, 1)
+bones/23/position = Vector3(-9.96231e-08, 0.123373, -1.09146e-05)
+bones/23/rotation = Quaternion(0.133965, 0.00393188, -0.0738435, 0.988223)
+bones/24/rotation = Quaternion(0.233293, -0.00165506, 0.019015, 0.972219)
+bones/25/rotation = Quaternion(-2.98023e-08, 0, 0, 1)
+bones/26/rotation = Quaternion(-2.98023e-08, 0, 0, 1)
+bones/27/position = Vector3(0.021406, 0.117303, -0.000106913)
+bones/27/rotation = Quaternion(0.273779, -0.0179243, -0.120569, 0.954037)
+bones/28/rotation = Quaternion(0.286142, 0.00178267, 0.0247706, 0.957865)
+bones/29/rotation = Quaternion(1.49012e-08, -1.49012e-08, 0, 1)
+bones/30/rotation = Quaternion(2.98023e-08, 2.98023e-08, -2.98023e-08, 1)
+bones/31/position = Vector3(0.0456373, 0.10534, 0.00217443)
+bones/31/rotation = Quaternion(0.299727, -0.0235607, -0.155829, 0.940917)
+bones/32/rotation = Quaternion(0.346036, 0.0115078, 0.0497053, 0.936833)
+bones/33/rotation = Quaternion(-2.98023e-08, 1.49012e-08, -2.98023e-08, 1)
+bones/35/rotation = Quaternion(0.486509, -0.490053, -0.571846, -0.442887)
+bones/36/rotation = Quaternion(0.183877, 0.836204, -0.510542, -0.0793602)
+bones/37/rotation = Quaternion(0.299983, 0.660321, -0.215366, 0.653914)
+bones/38/rotation = Quaternion(0.146873, -0.734356, 0.0128827, 0.662558)
+bones/39/position = Vector3(-0.0456371, 0.10534, 0.00219291)
+bones/39/rotation = Quaternion(0.207169, -0.011149, 0.0920772, 0.973899)
+bones/40/rotation = Quaternion(0.367674, -0.0128151, -0.0696486, 0.927254)
+bones/41/rotation = Quaternion(0, 0, 5.96046e-08, 1)
+bones/42/rotation = Quaternion(0, -5.96046e-08, 0, 1)
+bones/43/position = Vector3(-0.0214059, 0.117303, -8.6327e-05)
+bones/43/rotation = Quaternion(0.207488, -0.00683182, 0.0660859, 0.975979)
+bones/44/rotation = Quaternion(0.340484, -0.00248961, -0.0355845, 0.939574)
+bones/45/rotation = Quaternion(0, 0, 1.49012e-08, 1)
+bones/46/rotation = Quaternion(0, -2.98023e-08, -2.98023e-08, 1)
+bones/47/position = Vector3(2.31045e-07, 0.123373, 1.07707e-05)
+bones/47/rotation = Quaternion(0.1111, 0.00857195, 0.0251073, 0.993455)
+bones/48/rotation = Quaternion(0.304164, 0.00164519, -0.0205249, 0.952397)
+bones/49/rotation = Quaternion(-2.98023e-08, 2.98023e-08, 2.98023e-08, 1)
+bones/50/rotation = Quaternion(-1.49012e-08, -1.49012e-08, -1.49012e-08, 1)
+bones/51/position = Vector3(0.0272524, 0.118458, 0.00224904)
+bones/51/rotation = Quaternion(0.0395053, 0.010594, 0.00948327, 0.999118)
+bones/52/rotation = Quaternion(0.147316, 0.00014489, 0.0091084, 0.989048)
+bones/53/rotation = Quaternion(4.47035e-08, 0, 5.96046e-08, 1)
+bones/54/rotation = Quaternion(0, -1.49012e-08, -1.49012e-08, 1)
+bones/55/position = Vector3(0.0289996, 0.0365864, 0.0209313)
+bones/55/rotation = Quaternion(0.00225927, 0.0766485, 0.040247, 0.996243)
+bones/56/rotation = Quaternion(-0.110304, -0.753507, -0.090287, 0.641801)
+bones/57/rotation = Quaternion(1.49012e-08, 2.98023e-08, -5.96046e-08, 1)
+bones/58/rotation = Quaternion(-1.49012e-08, -1.04308e-07, 0, 1)
+bones/59/rotation = Quaternion(0.0783102, 0.216525, 0.967734, -0.102349)
+bones/60/rotation = Quaternion(0.0384557, 0.948042, -0.29249, -0.119109)
+bones/61/rotation = Quaternion(-0.0431043, 0.671375, -0.73831, 0.0479163)
+bones/62/rotation = Quaternion(0.0281565, 0.999365, 0.0204794, -0.00759924)
+bones/64/rotation = Quaternion(-0.124467, 0.015805, 0.983807, 0.127989)
+bones/65/rotation = Quaternion(0.0247624, 0.958473, -0.273575, -0.0766357)
+bones/66/rotation = Quaternion(0.100343, 0.563213, -0.812579, -0.111527)
+bones/67/rotation = Quaternion(0.00312944, 0.999869, 0.0156124, -0.00292876)
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("body", "animtree") instance=ExtResource("3_sdal0")]
+body = NodePath("..")
+animtree = NodePath("../AnimationTree")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../GeneralSkeleton")
+libraries = {
+"Man": ExtResource("4_bs7cg")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_26x4p")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/AttackShot/active = false
+parameters/AttackShot/request = 0
+parameters/HitShot/active = false
+parameters/HitShot/request = 0
+parameters/IdleBlend/blend_amount = 1.0
+parameters/RunBlend/blend_amount = 0
+
+[node name="VisualBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisualBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_rq4t3")
+
+[node name="ReachBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReachBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_u54i8")
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
+script = ExtResource("5_6jpmd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("BoxShape3D_4qrlw")
+disabled = true
+
+[connection signal="body_entered" from="VisualBox" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="ReachBox" to="." method="_on_reach_box_body_entered"]
+[connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered"]

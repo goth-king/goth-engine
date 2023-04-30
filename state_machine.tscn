@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfvlj2fatrhgs"]
+
+[ext_resource type="Script" path="res://Standing.gd" id="1_8kihu"]
+[ext_resource type="Script" path="res://Running.gd" id="2_2r3ws"]
+[ext_resource type="Script" path="res://Falling.gd" id="3_8fd4n"]
+[ext_resource type="Script" path="res://Climbing.gd" id="4_arhtc"]
+
+[sub_resource type="GDScript" id="GDScript_aoxjx"]
+script/source = "extends Node
+
+@export var body : CharacterBody3D
+@export var animtree : AnimationTree
+
+@onready var state = $Standing
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	print(\"body=\", body, \", animtree=\", animtree)
+	
+	for i in get_children():
+		i.sm = self
+		
+	state.enter()
+	
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	var oldstate = state
+	state.loop(delta)
+	if not state == oldstate:
+		state.enter()
+		pass
+"
+
+[node name="StateMachine" type="Node" node_paths=PackedStringArray("body", "animtree")]
+script = SubResource("GDScript_aoxjx")
+body = NodePath("")
+animtree = NodePath("")
+
+[node name="Standing" type="Node" parent="."]
+script = ExtResource("1_8kihu")
+
+[node name="Running" type="Node" parent="."]
+script = ExtResource("2_2r3ws")
+
+[node name="Jumping" type="Node" parent="."]
+script = ExtResource("3_8fd4n")
+
+[node name="Climbing" type="Node" parent="."]
+script = ExtResource("4_arhtc")

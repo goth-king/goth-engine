@@ -1,0 +1,4 @@
+res://world.tscn
+res://hero.tscn
+res://badguy.tscn
+res://state_machine.tscn

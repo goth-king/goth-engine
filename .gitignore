@@ -1,6 +1,2 @@
 # Godot-specific ignores
 /blender_files
-/resources/.godot/
-/resources/export.cfg
-/resources/export_presets.cfg
-/resources/icon.svg*
