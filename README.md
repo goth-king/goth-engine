@@ -6,3 +6,4 @@ Enemies respond to character's presence and pursue.
 ### Next Steps:
 Add damage and HP to character and enemies.
 Make attacks deal damage.
+Give enemy AI 3 behavior states: idle, pursue, attack.
