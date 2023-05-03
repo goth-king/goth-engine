@@ -1,9 +1,7 @@
-extends Badguy
+extends Animal
 
 
 var action = null
-var movement : Vector3 = Vector3(0,0,0)
-
 var target : Node = self
 
 
@@ -11,12 +9,15 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	if target != self:
-		movement = (target.position - self.position).normalized()
+	pass
 
 
 func _physics_process(delta):
-	pass
+	if target != self:
+		movement = (target.position - self.position).normalized()
+		movement.y = 0
+	move()
+
 
 
 

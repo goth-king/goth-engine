@@ -1,4 +1,9 @@
 res://world.tscn
+res://class_scripts/class_badguy.gd
+res://class_scripts/class_hero.gd
 res://hero.tscn
 res://badguy.tscn
 res://state_machine.tscn
+res://class_scripts/class_animal.gd
+res://hero.gd
+res://badguy.gd

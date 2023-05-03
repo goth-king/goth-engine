@@ -1,7 +1,8 @@
-extends Hero
+extends Animal
+class_name Hero
 
 var action = null
-var movement : Vector3 = Vector3(0,0,0)
+
 
 @onready var animtree = $AnimationTree
 
@@ -9,19 +10,18 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	movement = get_movement_vector()
-	
+		
 	if Input.is_action_just_pressed("attack"):
 		animtree.set("parameters/AttackShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
-	
-	pass
 
 func _physics_process(delta):
-	pass
+	movement = get_movement()
+	move()
 
 
-func get_movement_vector():
+
+func get_movement():
 	var joystick : Vector3
 	var orientation : Vector3
 	var camera : Camera3D = get_viewport().get_camera_3d()
