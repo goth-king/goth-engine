@@ -1,7 +1,11 @@
+Standing
+CharacterStateMachine
+Skeleton3D
+AnimationPlayer
+AnimationTree
+CharacterBody3D
+Character
 CollisionShape3D
 Area3D
 Node
 Node3D
-CharacterBody3D
-AnimationTree
-AnimationPlayer

@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqvpqu7k34525"]
+[gd_scene load_steps=13 format=3 uid="uid://das77svcanpa3"]
 
 [ext_resource type="PackedScene" uid="uid://pn8j1jn1n85j" path="res://hero.tscn" id="1_14ty2"]
 [ext_resource type="PackedScene" uid="uid://c8gqpekyormgi" path="res://world_camera.tscn" id="2_a0kgq"]
 [ext_resource type="ArrayMesh" uid="uid://datk3175gidyv" path="res://obj/platform_low.obj" id="3_7dl6n"]
-[ext_resource type="Script" path="res://class_scripts/class_platform.gd" id="3_x3of0"]
-[ext_resource type="Script" path="res://class_scripts/class_ladder.gd" id="4_5e5i7"]
+[ext_resource type="Script" path="res://class_scripts/classPlatform.gd" id="3_fbegg"]
 [ext_resource type="ArrayMesh" uid="uid://ca7k5a4jnwrsv" path="res://obj/ladder.obj" id="5_v6vry"]
-[ext_resource type="Script" path="res://class_scripts/class_terrain.gd" id="6_fkx7f"]
+[ext_resource type="Script" path="res://class_scripts/classLadder.gd" id="5_xfb0j"]
 [ext_resource type="ArrayMesh" uid="uid://grj31se1l583" path="res://obj/simple_terrain.obj" id="6_vvk2m"]
-[ext_resource type="PackedScene" uid="uid://6g2ye2c6e3bw" path="res://badguy.tscn" id="10_73yux"]
+[ext_resource type="Script" path="res://class_scripts/classTerrain.gd" id="7_glk4d"]
+[ext_resource type="PackedScene" uid="uid://b24or6nvwf45k" path="res://badguy.tscn" id="10_73yux"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sgbrw"]
 points = PackedVector3Array(0.954293, 1, 0.954293, -0.985481, 0, -0.985481, -0.985481, 0, 0.985481, 0.985481, 0, -0.985481, -0.954293, 1, -0.954293, 0.985481, 0, 0.985481, -0.954293, 1, 0.954293, 0.954293, 1, -0.954293)
@@ -34,7 +34,7 @@ shadow_enabled = true
 
 [node name="Platform" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8274, 1.26662, 7.91015)
-script = ExtResource("3_x3of0")
+script = ExtResource("3_fbegg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
 shape = SubResource("ConvexPolygonShape3D_sgbrw")
@@ -45,7 +45,7 @@ skeleton = NodePath("../..")
 
 [node name="Platform4" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66201, 1.26662, 7.91015)
-script = ExtResource("3_x3of0")
+script = ExtResource("3_fbegg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform4"]
 shape = SubResource("ConvexPolygonShape3D_sgbrw")
@@ -56,7 +56,7 @@ skeleton = NodePath("../..")
 
 [node name="Platform2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8274, 4.07447, 9.89864)
-script = ExtResource("3_x3of0")
+script = ExtResource("3_fbegg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform2"]
 shape = SubResource("ConvexPolygonShape3D_sgbrw")
@@ -67,7 +67,7 @@ skeleton = NodePath("../..")
 
 [node name="Platform5" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83229, 0.0617023, 6.51142)
-script = ExtResource("3_x3of0")
+script = ExtResource("3_fbegg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform5"]
 shape = SubResource("ConvexPolygonShape3D_sgbrw")
@@ -78,7 +78,7 @@ skeleton = NodePath("../..")
 
 [node name="Platform3" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.69501, 4.07447, 9.89864)
-script = ExtResource("3_x3of0")
+script = ExtResource("3_fbegg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform3"]
 shape = SubResource("ConvexPolygonShape3D_sgbrw")
@@ -89,7 +89,7 @@ skeleton = NodePath("../..")
 
 [node name="Ladder" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.84253, 1.36019, 4.51376)
-script = ExtResource("4_5e5i7")
+script = ExtResource("5_xfb0j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder"]
 shape = SubResource("ConvexPolygonShape3D_os4y1")
@@ -99,7 +99,7 @@ mesh = ExtResource("5_v6vry")
 
 [node name="Ladder2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.42694, 2.24348, 8.81005)
-script = ExtResource("4_5e5i7")
+script = ExtResource("5_xfb0j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder2"]
 shape = SubResource("ConvexPolygonShape3D_os4y1")
@@ -109,7 +109,7 @@ mesh = ExtResource("5_v6vry")
 
 [node name="Terrain" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.57198, 0)
-script = ExtResource("6_fkx7f")
+script = ExtResource("7_glk4d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain"]
 mesh = ExtResource("6_vvk2m")
