@@ -1,9 +1,7 @@
 extends CharacterInput
 
 
-
 func _ready():
-	super()
 	pass # Replace with function body.
 
 
@@ -13,6 +11,12 @@ func _process(delta):
 
 #gets joystick (or keyboard directional keys) input
 #rotates the input to be orthogonal to the camera's view angle projected onto x-z plane
+
+func _unhandled_input(event):
+	if event.is_action_pressed("attack"):
+		print("Input:Attack")
+		emit_signal("action_pressed",Attacking.new())
+	
 func get_movement_vector():
 	var joystick : Vector3
 	var orientation : Vector3

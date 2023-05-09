@@ -1,4 +1,4 @@
-extends Animal
+extends Character
 class_name Badguy
 
 func _ready():

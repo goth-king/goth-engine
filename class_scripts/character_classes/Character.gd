@@ -3,12 +3,10 @@ class_name Character
 
 @export var base_speed = 3
 @export var jump_height = 2
-@export var sight_radius = 5.0
-@export var state_machine : CharacterStateMachine
 
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var jump_speed = sqrt(2 * gravity * jump_height)
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
+var jump_speed = sqrt(16 * gravity * jump_height)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,5 +18,12 @@ func _process(delta):
 	pass
 	
 
-func states():
-	pass
+func move(movement : Vector3, speed_multiplier : int):
+	velocity.y -= gravity
+	velocity.x = base_speed * movement.x
+	velocity.z = base_speed * movement.z
+	move_and_slide()
+	look_at(Vector3(position.x + movement.x, position.y, position.z + movement.z))
+
+func jump():
+	velocity.y = jump_speed
