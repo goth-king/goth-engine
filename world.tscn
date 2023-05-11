@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://das77svcanpa3"]
 
-[ext_resource type="PackedScene" uid="uid://pn8j1jn1n85j" path="res://hero.tscn" id="1_14ty2"]
+[ext_resource type="PackedScene" uid="uid://bpie86wupf617" path="res://hero.tscn" id="1_14ty2"]
 [ext_resource type="PackedScene" uid="uid://c8gqpekyormgi" path="res://world_camera.tscn" id="2_a0kgq"]
 [ext_resource type="ArrayMesh" uid="uid://datk3175gidyv" path="res://obj/platform_low.obj" id="3_7dl6n"]
 [ext_resource type="Script" path="res://class_scripts/classPlatform.gd" id="3_fbegg"]

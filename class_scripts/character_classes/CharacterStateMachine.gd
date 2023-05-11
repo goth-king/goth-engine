@@ -2,32 +2,27 @@
 extends Node
 class_name CharacterStateMachine
 
-@export var character_body : CharacterBody3D
+
+@export var character : Character
+@export var input : CharacterInput
 @export var animation_tree : AnimationTree
-@export var character_input : CharacterInput
 @export var initial_state : CharacterState
 
-@onready var state = initial_state:
-	set(_state):
-		_set_state(_state)
+@onready var state : CharacterState = initial_state
 
-
-
-
-
-func _set_state(_state):
-	print("state is ",_state)
-	for i in get_children():
-		i.queue_free()
-	add_child(_state)
-	connect_action(_state)
+func _ready():
+	state.sm = self
+	state.enter_state()
 	
-	
-func connect_action(_state):
-	if _state.accept_action:
-		character_input.connect("action_pressed",_state.change_state)
-	
+func _physics_process(delta):
+	state.physics_step(delta)
+	pass
 
+func change_state(_state):
+	state.exit_state()
+	state = _state
+	state.sm = self
+	state.enter_state()
 
 
 

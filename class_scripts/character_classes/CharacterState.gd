@@ -2,9 +2,16 @@
 extends Node
 class_name CharacterState
 
-@onready var sm : CharacterStateMachine = get_parent()
-@onready var accept_action : bool
+var sm : CharacterStateMachine
 
-func change_state(state : CharacterState):
-	sm.state = state
-
+func _ready():
+	pass
+	
+func enter_state():
+	pass
+	
+func physics_step(delta):
+	pass
+	
+func exit_state():
+	pass

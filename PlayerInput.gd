@@ -1,23 +1,19 @@
 extends CharacterInput
 
+var joystick : Vector3
+
 
 func _ready():
 	pass # Replace with function body.
 
 
 func _process(delta):
-	movement = get_movement_vector()
-	pass
+	movement = get_movement()
+	action = get_action()
 
-#gets joystick (or keyboard directional keys) input
-#rotates the input to be orthogonal to the camera's view angle projected onto x-z plane
-
-func _unhandled_input(event):
-	if event.is_action_pressed("attack"):
-		print("Input:Attack")
-		emit_signal("action_pressed",Attacking.new())
 	
-func get_movement_vector():
+func get_movement():
+	
 	var joystick : Vector3
 	var orientation : Vector3
 	var camera : Camera3D = get_viewport().get_camera_3d()
@@ -33,3 +29,7 @@ func get_movement_vector():
 		joystick = joystick.normalized()
 		
 	return joystick
+	
+func get_action():
+	return Input.is_action_pressed("attack")
+

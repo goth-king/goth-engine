@@ -1,18 +1,28 @@
 extends CharacterState
 class_name Standing
 
+@export var falling_state : CharacterState
+@export var movement_state : CharacterState
+@export var action_state : CharacterState
+
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	accept_action = true
+func enter_state():
+	
 	print("CharacterState:Standing")
 	sm.animation_tree.set("parameters/RunBlend/blend_amount",0.0)
+	
+	
 
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func physics_step(delta):
+	if not sm.character.is_on_floor():
+		sm.change_state(falling_state)
 
-	if not sm.character_body.is_on_floor():
-		change_state(Falling.new())
+	elif sm.input.movement.length() > 0:
+		sm.change_state(movement_state)
+		
+	elif sm.input.action:
+		print("attack!")
+		sm.change_state(action_state)
 
-	if sm.character_input.movement.length() > 0:
-		change_state(Running.new())
+

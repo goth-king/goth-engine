@@ -5,6 +5,8 @@ class_name Character
 @export var jump_height = 2
 
 
+
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 var jump_speed = sqrt(16 * gravity * jump_height)
 
@@ -18,12 +20,19 @@ func _process(delta):
 	pass
 	
 
-func move(movement : Vector3, speed_multiplier : int):
+func travel(movement : Vector3, speed_multiplier : float):
 	velocity.y -= gravity
-	velocity.x = base_speed * movement.x
-	velocity.z = base_speed * movement.z
+	velocity.x = base_speed * movement.x * speed_multiplier
+	velocity.z = base_speed * movement.z * speed_multiplier
 	move_and_slide()
-	look_at(Vector3(position.x + movement.x, position.y, position.z + movement.z))
+	turn(movement)
+
+func turn(heading : Vector3):
+	look_at(Vector3(position.x + heading.x, position.y, position.z + heading.z))
+	
+func pursue(movement: Vector3, speed_multiplier: float):
+	pass
+	
 
 func jump():
 	velocity.y = jump_speed
