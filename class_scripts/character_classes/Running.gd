@@ -10,13 +10,9 @@ func enter_state():
 	print("CharacterState:Running")
 	sm.animation_tree.set("parameters/RunBlend/blend_amount",1.0)
 
-
-
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_step(delta):
 
-	
-#
 	if sm.input.movement.length() == 0:
 		sm.change_state(standing_state)
 		

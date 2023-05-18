@@ -1,8 +1,9 @@
 extends CharacterBody3D
 class_name Character
 
-@export var base_speed = 3
-@export var jump_height = 2
+@export var base_speed : float = 3.0
+@export var jump_height : float = 2.0
+@export var hit_points : float = 10 
 
 
 
@@ -19,6 +20,11 @@ func _ready():
 func _process(delta):
 	pass
 	
+	
+func take_damage(damage):
+	hit_points -= damage
+	if hit_points <= 0:
+		queue_free()
 
 func travel(movement : Vector3, speed_multiplier : float):
 	velocity.y -= gravity
@@ -36,3 +42,11 @@ func pursue(movement: Vector3, speed_multiplier: float):
 
 func jump():
 	velocity.y = jump_speed
+	
+	
+func spawn(scene : String):
+	print("Spawning instance")
+	var instance = load(scene).instantiate()
+	add_child(instance)
+	instance.position += Vector3(0,1,0)
+	

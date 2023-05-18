@@ -2,7 +2,7 @@
 extends Node
 class_name CharacterStateMachine
 
-
+	
 @export var character : Character
 @export var input : CharacterInput
 @export var animation_tree : AnimationTree

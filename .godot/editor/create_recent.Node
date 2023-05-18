@@ -1,3 +1,7 @@
+CharacterInput
+MeshInstance3D
+CollisionShape3D
+Attack
 Action
 Falling
 Running
@@ -8,7 +12,6 @@ AnimationPlayer
 AnimationTree
 CharacterBody3D
 Character
-CollisionShape3D
 Area3D
 Node
 Node3D

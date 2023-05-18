@@ -1,9 +1,10 @@
 res://badguy.tscn
 res://hero.tscn
 res://world.tscn
-res://PlayerInput.gd
-res://class_scripts/character_classes/Standing.gd
-res://class_scripts/character_classes/Running.gd
-res://class_scripts/character_classes/CharacterInput.gd
-res://class_scripts/character_classes/Action.gd
+res://class_scripts/character_classes/Damage.gd
+res://class_scripts/HitBox.gd
+res://class_scripts/Attack.gd
+res://class_scripts/character_classes/CharacterStateMachine.gd
+res://punch.tscn
 res://class_scripts/character_classes/Character.gd
+res://class_scripts/character_classes/Action.gd
