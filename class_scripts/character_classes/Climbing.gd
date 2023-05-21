@@ -10,11 +10,4 @@ func _ready():
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
-	if ladder == null:
-		change_state(Standing.new())
-#	else:
-#
-#	elif sm.character_input.movement + 
-#
-#	pass
+	pass

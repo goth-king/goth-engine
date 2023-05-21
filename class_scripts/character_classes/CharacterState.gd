@@ -4,6 +4,10 @@ class_name CharacterState
 
 var sm : CharacterStateMachine
 
+@export var state_animation : String
+
+var duration
+
 func _ready():
 	pass
 	

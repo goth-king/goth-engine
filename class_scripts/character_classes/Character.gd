@@ -6,6 +6,8 @@ class_name Character
 @export var hit_points : float = 10 
 
 
+@export var melee_hitbox : PackedScene
+
 
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
@@ -44,9 +46,9 @@ func jump():
 	velocity.y = jump_speed
 	
 	
-func spawn(scene : String):
-	print("Spawning instance")
-	var instance = load(scene).instantiate()
+func spawn(scene : PackedScene):
+	var instance = scene.instantiate()
+	print("Instantiated ",instance.name)
 	add_child(instance)
 	instance.position += Vector3(0,1,0)
 	

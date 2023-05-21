@@ -6,8 +6,7 @@ class_name Falling
 
 # Called when the node enters the scene tree for the first time.
 func enter_state():
-	print("sm ", sm)
-	print("CharacterState:Falling")
+	pass
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_step(delta):
@@ -15,5 +14,8 @@ func physics_step(delta):
 	sm.character.move_and_slide()
 
 	if sm.character.is_on_floor():
-		sm.change_state(standing_state)
+		if sm.input.movement.length() > 0:
+			sm.change_state(movement_state)
+		else:
+			sm.change_state(standing_state)
 

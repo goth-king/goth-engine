@@ -1,8 +1,10 @@
+Action
+Human
+MeleeAttack
 CharacterInput
 MeshInstance3D
 CollisionShape3D
 Attack
-Action
 Falling
 Running
 Standing
