@@ -8,6 +8,9 @@ class_name Character
 
 @export var melee_hitbox : PackedScene
 
+signal hit
+signal die
+
 
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
@@ -25,8 +28,11 @@ func _process(delta):
 	
 func take_damage(damage):
 	hit_points -= damage
-	if hit_points <= 0:
-		queue_free()
+	
+	if hit_points > 0:
+		emit_signal("hit")
+	else:
+		emit_signal("die")
 
 func travel(movement : Vector3, speed_multiplier : float):
 	velocity.y -= gravity

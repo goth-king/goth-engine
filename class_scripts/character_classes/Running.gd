@@ -4,6 +4,7 @@ class_name Running
 @export var falling_state : CharacterState
 @export var standing_state : CharacterState
 @export var action_state : CharacterState
+@export var reaction_state : CharacterState
 
 # Called when the node enters the scene tree for the first time.
 func enter_state():
