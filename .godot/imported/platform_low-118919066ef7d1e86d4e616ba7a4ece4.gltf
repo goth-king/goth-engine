@@ -6,6 +6,10 @@
 	"scene":0,
 	"scenes":[
 		{
+			"extras":{
+				"uuid":"0b656756-ef3b-436c-93d9-3eb4a855c375",
+				"assets reported":{}
+			},
 			"name":"Scene",
 			"nodes":[
 				0
@@ -15,7 +19,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"platform_low"
+			"name":"platform_low-convcol"
 		}
 	],
 	"materials":[

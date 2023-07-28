@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://pnvpj6lniqro"]
+
+[ext_resource type="Shader" path="res://shaders/eyes.gdshader" id="1_yakg0"]
+[ext_resource type="Texture2D" uid="uid://ccdifa3o16xn5" path="res://textures/eye_texture.jpg" id="2_mdr54"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yakg0")
+shader_parameter/albedo_texture = ExtResource("2_mdr54")

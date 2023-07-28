@@ -1,1 +1,7 @@
+Node3D
+PackedScene
+ResourceLoader
+Hero
+CharacterBody3D
+Area3D
 CharacterState

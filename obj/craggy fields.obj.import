@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5xm7ri3krhb0"
+path="res://.godot/imported/craggy fields.obj-675d02c8f05961420e8ae687dd5a2d6c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/craggy fields.obj-675d02c8f05961420e8ae687dd5a2d6c.mesh"]
+
+source_file="res://obj/craggy fields.obj"
+dest_files=["res://.godot/imported/craggy fields.obj-675d02c8f05961420e8ae687dd5a2d6c.mesh", "res://.godot/imported/craggy fields.obj-675d02c8f05961420e8ae687dd5a2d6c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

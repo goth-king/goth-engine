@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Goth-engine"
-run/main_scene="res://world.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+run/main_scene="res://scenes/world.tscn"
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]

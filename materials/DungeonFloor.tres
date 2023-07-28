@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ttwpyin2roxc"]
+
+[ext_resource type="Shader" path="res://shaders/DungeonFloor.gdshader" id="1_38wnr"]
+[ext_resource type="Texture2D" uid="uid://detmmpsrpyx2p" path="res://textures/gray stone.jpg" id="2_hxufn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_38wnr")
+shader_parameter/texture_albedo = ExtResource("2_hxufn")

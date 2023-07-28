@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0opkw1xq2sch"]
+
+[ext_resource type="PackedScene" uid="uid://cognoabbeu36f" path="res://blender_files/badguy.blend" id="1_mibti"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="badguy" parent="." instance=ExtResource("1_mibti")]

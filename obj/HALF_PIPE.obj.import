@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://coxgrfkfgql56"
+path="res://.godot/imported/HALF_PIPE.obj-e6b98a9fceefd11642a5360b3d71bd7f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/HALF_PIPE.obj-e6b98a9fceefd11642a5360b3d71bd7f.mesh"]
+
+source_file="res://obj/HALF_PIPE.obj"
+dest_files=["res://.godot/imported/HALF_PIPE.obj-e6b98a9fceefd11642a5360b3d71bd7f.mesh", "res://.godot/imported/HALF_PIPE.obj-e6b98a9fceefd11642a5360b3d71bd7f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

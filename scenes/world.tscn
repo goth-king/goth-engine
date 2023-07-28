@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2ungpsqlieof"]
+
+[ext_resource type="Script" path="res://classes/PlayerCamera.gd" id="2_ta6nn"]
+[ext_resource type="PackedScene" path="res://scenes/badguy.tscn" id="4_xaqvn"]
+[ext_resource type="PackedScene" uid="uid://c6ud8qkoiourr" path="res://scenes/hero.tscn" id="4_xy3st"]
+[ext_resource type="PackedScene" uid="uid://c05x0n6o7m28n" path="res://scenes/dungeon.tscn" id="5_45rkl"]
+[ext_resource type="PackedScene" uid="uid://cf7a5nbnaedw1" path="res://scenes/fairy.tscn" id="6_71hsu"]
+[ext_resource type="PackedScene" uid="uid://d0pjqnug0cjxe" path="res://scenes/craggy_fields.tscn" id="11_iakls"]
+
+[node name="World" type="Node3D"]
+
+[node name="craggy_fields" parent="." instance=ExtResource("11_iakls")]
+
+[node name="PlayerCamera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_ta6nn")
+arm_length = 1.82
+elevation = 2.0
+target = NodePath("../Hero")
+
+[node name="Badguy" parent="." instance=ExtResource("4_xaqvn")]
+transform = Transform3D(1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, 1, -28.7506, 12.084, -60.6162)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.962876, -7.17398e-09, 0.269945, 0.260972, -0.255682, 0.930871, 0.0690201, 0.966761, 0.24619, 0, 86.7542, 0)
+light_color = Color(0.968627, 0.117647, 0.92549, 1)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="Hero" parent="." instance=ExtResource("4_xy3st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3506, 12.0149, -59.8508)
+
+[node name="Fairy" parent="Hero" node_paths=PackedStringArray("target") instance=ExtResource("6_71hsu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80128, -0.388786)
+target = NodePath("../../Badguy")
+
+[node name="Node3D" parent="." instance=ExtResource("5_45rkl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.5261, 10.9772, -56.8183)

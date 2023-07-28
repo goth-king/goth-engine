@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmc8s0buhwulm"]
+
+[ext_resource type="ArrayMesh" uid="uid://b2erofr7d6bl4" path="res://obj/round shield.obj" id="1_k3yls"]
+
+[node name="RoundShield" type="MeshInstance3D"]
+mesh = ExtResource("1_k3yls")
+skeleton = NodePath("")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf7a5nbnaedw1"]
+
+[ext_resource type="Script" path="res://classes/Fairy.gd" id="1_l2r1f"]
+
+[node name="Fairy" type="Node3D"]
+script = ExtResource("1_l2r1f")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

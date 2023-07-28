@@ -1,0 +1,205 @@
+[gd_scene load_steps=24 format=3 uid="uid://c6ud8qkoiourr"]
+
+[ext_resource type="Script" path="res://classes/character_classes/Character.gd" id="1_276lo"]
+[ext_resource type="PackedScene" path="res://scenes/melee_hitbox.tscn" id="2_7y86l"]
+[ext_resource type="Script" path="res://scripts/PlayerInput.gd" id="3_1gkml"]
+[ext_resource type="PackedScene" uid="uid://bamooo3hc16q2" path="res://gltf/hero.glb" id="3_05e81"]
+[ext_resource type="Script" path="res://classes/character_classes/CharacterStateMachine.gd" id="6_0pfr6"]
+[ext_resource type="AnimationLibrary" uid="uid://bioq5x26vsl0h" path="res://animations/Man.res" id="7_jrru3"]
+[ext_resource type="Script" path="res://classes/character_classes/Standing.gd" id="7_jwke2"]
+[ext_resource type="Script" path="res://classes/character_classes/Running.gd" id="8_a31bf"]
+[ext_resource type="Script" path="res://classes/character_classes/Falling.gd" id="9_ul008"]
+[ext_resource type="Script" path="res://classes/character_classes/Action.gd" id="10_xk4d1"]
+[ext_resource type="Script" path="res://classes/character_classes/Reaction.gd" id="11_5kprg"]
+[ext_resource type="Script" path="res://classes/character_classes/Die.gd" id="12_jfi3o"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iaoxi"]
+radius = 0.25
+height = 1.7
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wvsue"]
+animation = &"MaleAnimations/Punch"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_hf4ks"]
+filters = ["../GeneralSkeleton:Chest", "../GeneralSkeleton:Head", "../GeneralSkeleton:Hips", "../GeneralSkeleton:LeftHand", "../GeneralSkeleton:LeftIndexDistal", "../GeneralSkeleton:LeftIndexIntermediate", "../GeneralSkeleton:LeftIndexProximal", "../GeneralSkeleton:LeftLittleDistal", "../GeneralSkeleton:LeftLittleIntermediate", "../GeneralSkeleton:LeftLittleProximal", "../GeneralSkeleton:LeftLowerArm", "../GeneralSkeleton:LeftMiddleDistal", "../GeneralSkeleton:LeftMiddleIntermediate", "../GeneralSkeleton:LeftMiddleProximal", "../GeneralSkeleton:LeftRingDistal", "../GeneralSkeleton:LeftRingIntermediate", "../GeneralSkeleton:LeftRingProximal", "../GeneralSkeleton:LeftShoulder", "../GeneralSkeleton:LeftThumbDistal", "../GeneralSkeleton:LeftThumbMetacarpal", "../GeneralSkeleton:LeftThumbProximal", "../GeneralSkeleton:LeftUpperArm", "../GeneralSkeleton:Neck", "../GeneralSkeleton:RightHand", "../GeneralSkeleton:RightIndexDistal", "../GeneralSkeleton:RightIndexIntermediate", "../GeneralSkeleton:RightIndexProximal", "../GeneralSkeleton:RightLittleDistal", "../GeneralSkeleton:RightLittleIntermediate", "../GeneralSkeleton:RightLittleProximal", "../GeneralSkeleton:RightLowerArm", "../GeneralSkeleton:RightMiddleDistal", "../GeneralSkeleton:RightMiddleIntermediate", "../GeneralSkeleton:RightMiddleProximal", "../GeneralSkeleton:RightRingDistal", "../GeneralSkeleton:RightRingIntermediate", "../GeneralSkeleton:RightRingProximal", "../GeneralSkeleton:RightShoulder", "../GeneralSkeleton:RightThumbDistal", "../GeneralSkeleton:RightThumbMetacarpal", "../GeneralSkeleton:RightThumbProximal", "../GeneralSkeleton:RightUpperArm", "../GeneralSkeleton:Spine", "../GeneralSkeleton:UpperChest", "../GeneralSkeleton:mixamorig_LeftHandIndex1", "../GeneralSkeleton:mixamorig_LeftHandMiddle1", "../GeneralSkeleton:mixamorig_LeftHandPinky1", "../GeneralSkeleton:mixamorig_LeftHandRing1", "../GeneralSkeleton:mixamorig_LeftHandThumb1", "../GeneralSkeleton:mixamorig_RightHandIndex1", "../GeneralSkeleton:mixamorig_RightHandMiddle1", "../GeneralSkeleton:mixamorig_RightHandPinky1", "../GeneralSkeleton:mixamorig_RightHandRing1", "../GeneralSkeleton:mixamorig_RightHandThumb1"]
+fadein_time = 0.25
+fadeout_time = 0.25
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q345g"]
+animation = &"MaleAnimations/Alert"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6d3hj"]
+animation = &"MaleAnimations/Idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_uemxx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lehcy"]
+animation = &"MaleAnimations/Die"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_fqkjh"]
+filters = [".:LeftFoot", ".:LeftLowerLeg", ".:LeftToes", ".:LeftUpperLeg", ".:RightFoot", ".:RightLowerLeg", ".:RightToes", ".:RightUpperLeg"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o85ta"]
+animation = &"MaleAnimations/Run"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_40lv5"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xhafj"]
+nodes/Action/node = SubResource("AnimationNodeAnimation_wvsue")
+nodes/Action/position = Vector2(640, 240)
+nodes/ActionShot/node = SubResource("AnimationNodeOneShot_hf4ks")
+nodes/ActionShot/position = Vector2(864, 32)
+nodes/Alert/node = SubResource("AnimationNodeAnimation_q345g")
+nodes/Alert/position = Vector2(112, 96)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_6d3hj")
+nodes/Idle/position = Vector2(112, -64)
+nodes/IdleBlend/node = SubResource("AnimationNodeBlend2_uemxx")
+nodes/IdleBlend/position = Vector2(336, -16)
+nodes/Reaction/node = SubResource("AnimationNodeAnimation_lehcy")
+nodes/Reaction/position = Vector2(928, 240)
+nodes/ReactionShot/node = SubResource("AnimationNodeOneShot_fqkjh")
+nodes/ReactionShot/position = Vector2(1120, 32)
+nodes/Run/node = SubResource("AnimationNodeAnimation_o85ta")
+nodes/Run/position = Vector2(336, 224)
+nodes/RunBlend/node = SubResource("AnimationNodeBlend2_40lv5")
+nodes/RunBlend/position = Vector2(576, 32)
+nodes/output/position = Vector2(1408, 112)
+node_connections = [&"output", 0, &"ReactionShot", &"ActionShot", 0, &"RunBlend", &"ActionShot", 1, &"Action", &"IdleBlend", 0, &"Idle", &"IdleBlend", 1, &"Alert", &"ReactionShot", 0, &"ActionShot", &"ReactionShot", 1, &"Reaction", &"RunBlend", 0, &"IdleBlend", &"RunBlend", 1, &"Run"]
+
+[node name="Hero" type="CharacterBody3D"]
+script = ExtResource("1_276lo")
+melee_hitbox = ExtResource("2_7y86l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_iaoxi")
+
+[node name="Model" parent="." instance=ExtResource("3_05e81")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="Model/Rig" index="0"]
+bones/1/position = Vector3(0.00274731, 0.874719, -0.00509525)
+bones/1/rotation = Quaternion(-0.0392375, -0.36616, -0.0144593, 0.929612)
+bones/2/rotation = Quaternion(0.0476508, 0.0397627, -0.00832948, 0.998038)
+bones/3/rotation = Quaternion(0.0951853, 0.0802064, -0.0178367, 0.992063)
+bones/4/rotation = Quaternion(0.0951891, 0.080308, -0.0179588, 0.992052)
+bones/5/rotation = Quaternion(0.520824, 0.46446, 0.524, -0.488307)
+bones/6/rotation = Quaternion(0.0476086, 0.836929, -0.534423, 0.108052)
+bones/7/rotation = Quaternion(0.28572, -0.597675, 0.297681, 0.687412)
+bones/8/rotation = Quaternion(-0.0739905, 0.792094, 0.0906111, 0.599085)
+bones/9/rotation = Quaternion(0.152321, -0.00101554, -0.00553875, 0.988315)
+bones/10/rotation = Quaternion(0, 0, 5.96046e-08, 1)
+bones/11/rotation = Quaternion(2.98023e-08, -2.98023e-08, 2.98023e-08, 1)
+bones/12/rotation = Quaternion(0.23742, -0.00165287, 0.0194569, 0.971211)
+bones/13/rotation = Quaternion(-2.98023e-08, 0, 0, 1)
+bones/14/rotation = Quaternion(-2.98023e-08, 0, 0, 1)
+bones/15/rotation = Quaternion(0.346111, 0.0115184, 0.0496609, 0.936808)
+bones/16/rotation = Quaternion(-2.98023e-08, 1.49012e-08, -2.98023e-08, 1)
+bones/18/rotation = Quaternion(0.285965, 0.00168903, 0.024542, 0.957924)
+bones/19/rotation = Quaternion(1.49012e-08, -1.49012e-08, 0, 1)
+bones/20/rotation = Quaternion(2.98023e-08, 2.98023e-08, -2.98023e-08, 1)
+bones/21/rotation = Quaternion(-0.218811, 0.673574, 0.208358, 0.674542)
+bones/22/rotation = Quaternion(-1.77636e-15, 7.45058e-08, 1.11022e-15, 1)
+bones/23/rotation = Quaternion(1.49012e-08, -1.04308e-07, 0, 1)
+bones/24/rotation = Quaternion(0.486708, -0.489471, -0.573468, -0.441212)
+bones/25/rotation = Quaternion(0.183725, 0.835924, -0.511198, -0.0784397)
+bones/26/rotation = Quaternion(0.299068, 0.661793, -0.215023, 0.652957)
+bones/27/rotation = Quaternion(0.144848, -0.734071, 0.0117743, 0.66334)
+bones/28/rotation = Quaternion(0.147305, 0.000191327, 0.0094954, 0.989046)
+bones/29/rotation = Quaternion(4.47035e-08, 0, 5.96046e-08, 1)
+bones/30/rotation = Quaternion(0, -1.49012e-08, -1.49012e-08, 1)
+bones/31/rotation = Quaternion(0.281843, 0.00151301, -0.0184573, 0.959282)
+bones/32/rotation = Quaternion(-2.98023e-08, 2.98023e-08, 2.98023e-08, 1)
+bones/33/rotation = Quaternion(-1.49012e-08, -1.49012e-08, -1.49012e-08, 1)
+bones/34/rotation = Quaternion(0.35852, -0.0125813, -0.0692179, 0.930867)
+bones/35/rotation = Quaternion(0, 0, 5.96046e-08, 1)
+bones/36/rotation = Quaternion(0, -5.96046e-08, 0, 1)
+bones/37/rotation = Quaternion(0.329695, -0.00243597, -0.034654, 0.943448)
+bones/38/rotation = Quaternion(0, 0, 1.49012e-08, 1)
+bones/39/rotation = Quaternion(0, -2.98023e-08, -2.98023e-08, 1)
+bones/40/rotation = Quaternion(-0.106473, -0.755825, -0.0864131, 0.640253)
+bones/41/rotation = Quaternion(1.49012e-08, 2.98023e-08, -5.96046e-08, 1)
+bones/42/rotation = Quaternion(-1.49012e-08, -1.04308e-07, 0, 1)
+bones/43/rotation = Quaternion(-0.0143793, -0.0107595, 0.0021824, 0.999836)
+bones/44/rotation = Quaternion(-0.0437598, 0.176416, -0.00423705, 0.983334)
+bones/45/rotation = Quaternion(0.0778438, 0.216411, 0.967835, -0.101993)
+bones/46/rotation = Quaternion(0.0383418, 0.948206, -0.291988, -0.119076)
+bones/47/rotation = Quaternion(-0.0430307, 0.671966, -0.737782, 0.0478186)
+bones/48/rotation = Quaternion(0.028132, 0.999366, 0.0202829, -0.00802386)
+bones/49/rotation = Quaternion(-0.124381, 0.0161698, 0.983829, 0.12786)
+bones/50/rotation = Quaternion(0.0251987, 0.957913, -0.275437, -0.0768231)
+bones/51/rotation = Quaternion(0.100389, 0.562887, -0.812799, -0.111525)
+bones/52/rotation = Quaternion(0.00312944, 0.999869, 0.0156124, -0.00292876)
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("3_1gkml")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Model/Rig/GeneralSkeleton")
+libraries = {
+"MaleAnimations": ExtResource("7_jrru3")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_xhafj")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/ActionShot/active = false
+parameters/ActionShot/internal_active = false
+parameters/ActionShot/request = 0
+parameters/IdleBlend/blend_amount = 1.0
+parameters/ReactionShot/active = false
+parameters/ReactionShot/internal_active = false
+parameters/ReactionShot/request = 0
+parameters/RunBlend/blend_amount = 0.0
+
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "input", "animation_tree", "animation_player", "initial_state")]
+script = ExtResource("6_0pfr6")
+character = NodePath("..")
+input = NodePath("../PlayerInput")
+animation_tree = NodePath("../AnimationTree")
+animation_player = NodePath("../AnimationPlayer")
+initial_state = NodePath("Standing")
+
+[node name="Standing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("falling_state", "movement_state", "action_state", "reaction_state", "death_state")]
+script = ExtResource("7_jwke2")
+falling_state = NodePath("../Falling")
+movement_state = NodePath("../Running")
+action_state = NodePath("../Action")
+reaction_state = NodePath("../Reaction")
+death_state = NodePath("../Dying")
+
+[node name="Running" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("falling_state", "standing_state", "action_state", "reaction_state")]
+script = ExtResource("8_a31bf")
+falling_state = NodePath("../Falling")
+standing_state = NodePath("../Standing")
+action_state = NodePath("../Action")
+reaction_state = NodePath("../Reaction")
+
+[node name="Falling" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("standing_state", "movement_state")]
+script = ExtResource("9_ul008")
+standing_state = NodePath("../Standing")
+movement_state = NodePath("../Running")
+
+[node name="Action" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("standing_state", "movement_state", "falling_state", "reaction_state")]
+script = ExtResource("10_xk4d1")
+standing_state = NodePath("../Standing")
+movement_state = NodePath("../Running")
+falling_state = NodePath("../Falling")
+reaction_state = NodePath("../Reaction")
+spawn_scene = ExtResource("2_7y86l")
+state_animation = "MaleAnimations/Punch"
+
+[node name="Reaction" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("standing_state", "movement_state", "falling_state", "action_state")]
+script = ExtResource("11_5kprg")
+standing_state = NodePath("../Standing")
+movement_state = NodePath("../Running")
+falling_state = NodePath("../Falling")
+action_state = NodePath("../Action")
+state_animation = "MaleAnimations/Hit"
+
+[node name="Dying" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("12_jfi3o")
+state_animation = "MaleAnimations/Die"
+
+[editable path="Model"]

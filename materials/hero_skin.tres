@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d3eijjs7jlof"]
+
+[ext_resource type="Shader" path="res://shaders/skin.gdshader" id="1_egj87"]
+[ext_resource type="Texture2D" uid="uid://5vhc7bqpkb4j" path="res://textures/young_lightskinned_male_diffuse_EmoEyes.png" id="2_uv631"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_egj87")
+shader_parameter/albedo_texture = ExtResource("2_uv631")

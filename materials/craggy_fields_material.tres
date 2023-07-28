@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://b0lgfxfb7wm86"]
+
+[ext_resource type="Shader" path="res://shaders/craggy_fields.gdshader" id="1_m5oyh"]
+[ext_resource type="Texture2D" uid="uid://box400r81nmjn" path="res://textures/red dirt.jpg" id="2_edgtu"]
+[ext_resource type="Texture2D" uid="uid://c4mpm7kubl28p" path="res://textures/dirt2 texure.jpg" id="3_w8uih"]
+[ext_resource type="Texture2D" uid="uid://qsdhdfwhevoa" path="res://textures/craggy_terrain_variation3.jpg" id="4_77y1m"]
+[ext_resource type="Texture2D" uid="uid://253tll2f4kra" path="res://textures/craggy_terrain_variation_NormalMap.png" id="5_tj38i"]
+[ext_resource type="Texture2D" uid="uid://2s66keipswqa" path="res://textures/cracking soil.jpg" id="6_tpcwa"]
+[ext_resource type="Texture2D" uid="uid://k75ruas1qrv0" path="res://textures/red_dirt_NormalMap.png" id="7_c08oe"]
+[ext_resource type="Texture2D" uid="uid://cnbuv16e48wrc" path="res://textures/cracking_dirt_NormalMap.png" id="8_6ro8x"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_m5oyh")
+shader_parameter/albedo_color = Color(1, 0.709804, 0.690196, 1)
+shader_parameter/floor_max_slope = 0.707
+shader_parameter/slope_blend = 0.327
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector2(8, 8)
+shader_parameter/uv1_offset = null
+shader_parameter/uv2_scale = null
+shader_parameter/uv2_offset = null
+shader_parameter/texture_albedo_floor = ExtResource("2_edgtu")
+shader_parameter/texture_normal_floor = ExtResource("7_c08oe")
+shader_parameter/texture_albedo_wall = ExtResource("6_tpcwa")
+shader_parameter/texture_normal_wall = ExtResource("8_6ro8x")
+shader_parameter/texture_albedo_sand = ExtResource("3_w8uih")
+shader_parameter/texture_albedo_variation = ExtResource("4_77y1m")
+shader_parameter/texture_albedo_variation_normal = ExtResource("5_tj38i")

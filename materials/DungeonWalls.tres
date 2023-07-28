@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dmctj5hpy6jhs"]
+
+[ext_resource type="Shader" path="res://shaders/DungeonWalls.gdshader" id="1_sq5co"]
+[ext_resource type="Texture2D" uid="uid://bjqc544w401mu" path="res://textures/rock_wall_08_diff_1k.jpg" id="2_ctj5t"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_sq5co")
+shader_parameter/texture_albedo = ExtResource("2_ctj5t")
